@@ -1,0 +1,29 @@
+﻿<!--Page that displays all the booking
+    Author: Paul-->
+
+@model IEnumerable<TravelExperts_WebApp.Models.Booking>
+@{
+    Layout = null;
+}
+
+@{
+    ViewBag.Title = "Your bookings";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<!--Displays each record as cards-->
+<div class="container float-left jumbotron-fluid">
+    @foreach (var item in Model)
+    {
+        <div class="card  m-2 float-left card-size card-border ">
+            <div class="card-body">
+                <h5 class="card-title">Booking No: @Html.DisplayFor(modelItem => item.BookingNo)</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Booking Date: @Html.DisplayFor(modelItem => item.BookingDate)</h6>
+                <p class="card-text">Number of Travelers: @Html.DisplayFor(modelItem => item.TravelerCount)</p>
+                <!--Link to the details page-->
+                @Html.ActionLink("More Details", "Detail", "Booking", new { id = item.BookingId }, new { @class = "card-link" })
+            </div>
+        </div>
+    }
+</div>

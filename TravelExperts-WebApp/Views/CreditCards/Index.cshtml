@@ -1,0 +1,35 @@
+﻿<!--Display Credit Cards
+    Author: Raman-->
+
+@model IEnumerable<TravelExperts_WebApp.Models.CreditCard>
+@{
+    ViewBag.Title = "Credit Card Details";
+}
+@{
+    Layout = null;
+}
+<h2>@ViewBag.Title</h2>
+
+<!--Displays each record as cards-->
+<div class="container float-left jumbotron-fluid">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col" class="h6">Credit Card Number</th>
+                <th scope="col" class="h6">Expiry</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.CCNumber)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CCExpiry)</td>
+                    <!--Link to the details page-->
+                    <td>@Html.ActionLink("Edit", "Edit", new { id = item.CreditCardId })</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

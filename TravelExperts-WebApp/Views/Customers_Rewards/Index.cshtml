@@ -1,0 +1,36 @@
+﻿<!--Display  Rewards Details 
+    Author: Raman-->
+@model IEnumerable<TravelExperts_WebApp.Models.Customers_Rewards>
+@{
+    ViewBag.Title = "Reward Programs";
+}
+@{
+    Layout = null;
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            <span>Reward Name</span>
+        </th>
+        <th>
+            <span>Reward Number</span>
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reward.RwdName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RwdNumber)
+            </td>
+        </tr>
+    }
+
+</table>

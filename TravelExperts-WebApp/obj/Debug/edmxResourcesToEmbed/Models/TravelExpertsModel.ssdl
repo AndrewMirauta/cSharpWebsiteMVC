@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TravelExpertsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BookingDetails">
+    <Key>
+      <PropertyRef Name="BookingDetailId" />
+    </Key>
+    <Property Name="BookingDetailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ItineraryNo" Type="float" />
+    <Property Name="TripStart" Type="datetime" />
+    <Property Name="TripEnd" Type="datetime" />
+    <Property Name="Description" Type="nvarchar" MaxLength="255" />
+    <Property Name="Destination" Type="nvarchar" MaxLength="255" />
+    <Property Name="BasePrice" Type="money" />
+    <Property Name="AgencyCommission" Type="money" />
+    <Property Name="BookingId" Type="int" />
+    <Property Name="RegionId" Type="nvarchar" MaxLength="5" />
+    <Property Name="ClassId" Type="nvarchar" MaxLength="5" />
+    <Property Name="FeeId" Type="nvarchar" MaxLength="10" />
+    <Property Name="ProductSupplierId" Type="int" />
+  </EntityType>
+  <EntityType Name="Bookings">
+    <Key>
+      <PropertyRef Name="BookingId" />
+    </Key>
+    <Property Name="BookingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BookingDate" Type="datetime" />
+    <Property Name="BookingNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="TravelerCount" Type="float" />
+    <Property Name="CustomerId" Type="int" />
+    <Property Name="TripTypeId" Type="nvarchar" MaxLength="1" />
+    <Property Name="PackageId" Type="int" />
+  </EntityType>
+  <EntityType Name="CreditCards">
+    <Key>
+      <PropertyRef Name="CreditCardId" />
+    </Key>
+    <Property Name="CreditCardId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CCName" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="CCNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CCExpiry" Type="datetime" Nullable="false" />
+    <Property Name="CustomerId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="CustomerId" />
+    </Key>
+    <Property Name="CustomerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustFirstName" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="CustLastName" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="CustAddress" Type="nvarchar" MaxLength="75" Nullable="false" />
+    <Property Name="CustCity" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CustProv" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="CustPostal" Type="nvarchar" MaxLength="7" Nullable="false" />
+    <Property Name="CustCountry" Type="nvarchar" MaxLength="25" />
+    <Property Name="CustHomePhone" Type="nvarchar" MaxLength="20" />
+    <Property Name="CustBusPhone" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="CustEmail" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="AgentId" Type="int" />
+    <Property Name="Password" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Customers_Rewards">
+    <Key>
+      <PropertyRef Name="CustomerId" />
+      <PropertyRef Name="RewardId" />
+    </Key>
+    <Property Name="CustomerId" Type="int" Nullable="false" />
+    <Property Name="RewardId" Type="int" Nullable="false" />
+    <Property Name="RwdNumber" Type="nvarchar" MaxLength="25" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Rewards">
+    <Key>
+      <PropertyRef Name="RewardId" />
+    </Key>
+    <Property Name="RewardId" Type="int" Nullable="false" />
+    <Property Name="RwdName" Type="nvarchar" MaxLength="50" />
+    <Property Name="RwdDesc" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="Bookings_FK00">
+    <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+    <End Role="Bookings" Type="Self.Bookings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="CustomerId" />
+      </Principal>
+      <Dependent Role="Bookings">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CreditCards_FK00">
+    <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+    <End Role="CreditCards" Type="Self.CreditCards" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="CustomerId" />
+      </Principal>
+      <Dependent Role="CreditCards">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Customers_Rewards_FK00">
+    <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+    <End Role="Customers_Rewards" Type="Self.Customers_Rewards" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="CustomerId" />
+      </Principal>
+      <Dependent Role="Customers_Rewards">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Customers_Rewards_FK01">
+    <End Role="Rewards" Type="Self.Rewards" Multiplicity="1" />
+    <End Role="Customers_Rewards" Type="Self.Customers_Rewards" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rewards">
+        <PropertyRef Name="RewardId" />
+      </Principal>
+      <Dependent Role="Customers_Rewards">
+        <PropertyRef Name="RewardId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BookingDetails_Bookings">
+    <End Role="Bookings" Type="Self.Bookings" Multiplicity="0..1" />
+    <End Role="BookingDetails" Type="Self.BookingDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bookings">
+        <PropertyRef Name="BookingId" />
+      </Principal>
+      <Dependent Role="BookingDetails">
+        <PropertyRef Name="BookingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TravelExpertsModelStoreContainer">
+    <EntitySet Name="BookingDetails" EntityType="Self.BookingDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Bookings" EntityType="Self.Bookings" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CreditCards" EntityType="Self.CreditCards" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customers_Rewards" EntityType="Self.Customers_Rewards" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Rewards" EntityType="Self.Rewards" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="Bookings_FK00" Association="Self.Bookings_FK00">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Bookings" EntitySet="Bookings" />
+    </AssociationSet>
+    <AssociationSet Name="CreditCards_FK00" Association="Self.CreditCards_FK00">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="CreditCards" EntitySet="CreditCards" />
+    </AssociationSet>
+    <AssociationSet Name="Customers_Rewards_FK00" Association="Self.Customers_Rewards_FK00">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Customers_Rewards" EntitySet="Customers_Rewards" />
+    </AssociationSet>
+    <AssociationSet Name="Customers_Rewards_FK01" Association="Self.Customers_Rewards_FK01">
+      <End Role="Rewards" EntitySet="Rewards" />
+      <End Role="Customers_Rewards" EntitySet="Customers_Rewards" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BookingDetails_Bookings" Association="Self.FK_BookingDetails_Bookings">
+      <End Role="Bookings" EntitySet="Bookings" />
+      <End Role="BookingDetails" EntitySet="BookingDetails" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

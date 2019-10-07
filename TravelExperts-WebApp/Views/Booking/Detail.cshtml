@@ -1,0 +1,36 @@
+﻿<!--Booking Details Page
+    Author: Paul-->
+@model IEnumerable<TravelExperts_WebApp.Models.BookingDetail>
+
+@{
+    ViewBag.Title = "Booking Details";
+}
+
+<div class="text-center"><h2>@ViewBag.Title</h2></div>
+
+<!--Displays each record as cards-->
+<div class="container float-left text-center jumbotron-fluid">
+    <div class="card-deck">
+        @foreach (var item in Model)
+        {
+            <div class="card  m-2 float-left card-border">
+                <div class="card-body">
+                    <h5 class="card-title">Itinerary No: @Html.DisplayFor(modelItem => item.ItineraryNo)</h5>
+                    <p class="card-text text-muted">Destination: @Html.DisplayFor(modelItem => item.Destination)</p>
+                    <p class="card-text text-muted">Trip Start Date: @Html.DisplayFor(modelItem => item.TripStart)</p>
+                    <p class="card-text text-muted">Trip End Date: @Html.DisplayFor(modelItem => item.TripEnd)</p>
+                    <p class="card-text text-muted text-nowrap">Item Details: @Html.DisplayFor(modelItem => item.Description)</p>
+                    <h6 class="card-title m-1">Price: @Html.DisplayFor(modelItem => item.BasePrice)</h6>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<!-- Display the total amount-->
+<div class="text-center">
+    <p class="h4 mb-4">Total Cost: @ViewBag.TotalAmount</p>
+</div>
+<!--Link to return to the bookings page-->
+<div class="text-center">
+    @Html.ActionLink("Back to Profile", "Index", "Home")
+</div>

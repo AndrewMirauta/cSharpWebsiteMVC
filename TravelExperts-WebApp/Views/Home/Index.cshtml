@@ -1,0 +1,49 @@
+﻿<!-- User Profile Page
+    Author: Tea & Paul-->
+@model TravelExperts_WebApp.Models.Customer
+
+@{
+    ViewBag.Title = "Home Page";
+}
+<body style="background-image: url('../../images/cloud1.jpg'); background-repeat:no-repeat;background-size: cover;">
+
+    <div class="text-right">
+        <p class="h5"> @Html.ActionLink("Logout", "LogOut", "Home", new { @class = "text-white mr-1" })</p>
+    </div>
+
+    <div class="container ">
+        <div class="card text-center mb-3 ">
+            <link href="~/Content/bootstrap-reboot.min.css" rel="stylesheet" />
+            <div class="card-body img">
+                <h2 class="card-title h4">User Profile</h2>
+
+                <img src="~/images/usricon.jpg" width="250" />
+                <br /><br />
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Name: @Html.DisplayFor(model => model.CustFirstName) @Html.DisplayFor(model => model.CustLastName)</h5>
+                        <h5>Contact Number: @Html.DisplayFor(model => model.CustHomePhone)</h5>
+                    </div>
+                </div>
+                <br />
+                <span>@Html.ActionLink("Details", "Details", "Customers", new { id = Model.CustomerId }, new { @class = "font-weight-bolder h3" })</span>
+            </div>
+        </div>
+
+        <div class="card text-center mb-3 ">
+            <div class="card-body text-sm-center bg-lightblue">
+                @{ Html.RenderAction("Index", "Booking"); }
+            </div>
+        </div>
+        <div class="card text-center mb-3 ">
+            <div class="card-body">
+                @{ Html.RenderAction("Index", "Customers_Rewards"); }
+            </div>
+        </div>
+        <div class="card text-center mb-3 ">
+            <div class="card-body">
+                @{ Html.RenderAction("Index", "CreditCards"); }
+            </div>
+        </div>
+    </div>
+</body>

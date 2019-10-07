@@ -1,0 +1,60 @@
+﻿<!--Customer Details View
+    Author: Tea-->
+
+@model TravelExperts_WebApp.Models.Customer
+
+@{
+    ViewBag.Title = "CustomerTile";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2 col-md-2"></div>
+        <div class="col-lg-8 col-md-8 col-sm-12">
+            <table class="table table-striped">
+                <tr>
+                    <th scope="col"> @Html.DisplayFor(model => model.CustFirstName)</th>
+                    <th scope="col">@Html.DisplayFor(model => model.CustLastName)</th>
+                </tr>
+                <tr>
+                    <td> Phone:</td>
+                    <td> @Html.DisplayFor(model => model.CustHomePhone)</td>
+                </tr>
+                <tr>
+                    <td>Address:</td>
+                    <td>@Html.DisplayFor(model => model.CustAddress)</td>
+                </tr>
+                <tr>
+                    <td>City:</td>
+                    <td>@Html.DisplayFor(model => model.CustCity)</td>
+                </tr>
+                <tr>
+                    <td>Province:</td>
+                    <td>@Html.DisplayFor(model => model.CustProv)</td>
+                </tr>
+                <tr>
+                    <td>Postal Code:</td>
+                    <td>@Html.DisplayFor(model => model.CustPostal)</td>
+                </tr>
+                <tr>
+                    <td>Country:</td>
+                    <td>@Html.DisplayFor(model => model.CustCountry)</td>
+                </tr>
+                <tr>
+                    <td>Buisness Phone:</td>
+                    <td>@Html.DisplayFor(model => model.CustBusPhone)</td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td>@Html.DisplayFor(model => model.CustEmail)</td>
+                </tr>
+            </table>
+
+            <p>
+                @Html.ActionLink("Update Details", "Edit", new { id = Model.CustomerId }) |
+                @Html.ActionLink("Back to Profile", "Index", "Home")
+            </p>
+        </div>
+        <div class="col-lg-2 col-md-2"></div>
+    </div>
+</div>
